@@ -17,7 +17,7 @@ from rl.agents import DQNAgent
 from rl.memory import SequentialMemory
 from rl.policy import LinearAnnealedPolicy, EpsGreedyQPolicy
 
-
+seed = 42
 # Use the Baseline Atari environment because of Deepmind helper functions
 env = make_atari("BreakoutNoFrameskip-v4")
 # Warp the frames, grey scale, stake four frame and scale to smaller ratio
