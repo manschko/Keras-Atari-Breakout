@@ -1,7 +1,7 @@
 # base container for jetsonNano Tensorflow
-FROM tensorflow/tensorflow:latest-gpu-jupyter
-#RUN apt-get update -qq \
-#    && apt-get upgrade -qq
+FROM l4t-tensorflow:r34.1.0-tf1.15-py3
+RUN apt-get update -qq \
+    && apt-get upgrade -qq
 
 
 
@@ -12,6 +12,7 @@ WORKDIR /src
 #RUN pip3 install --upgrade pip
 RUN pip install --trusted-host pypi.python.org -r requirements.txt
 #import ROMS
-RUN ale-import-roms ROMS2/
+RUN python3 -m atari_py.import_roms Roms/
+RUN pip install -e baselines/
 # CMD ['python3', '/src/main.py']
 EXPOSE 8080
