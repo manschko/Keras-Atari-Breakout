@@ -11,6 +11,7 @@ from baselines.common.atari_wrappers import make_atari, wrap_deepmind
 from keras.models import Sequential
 from keras.layers import Dense, Flatten, Convolution2D
 from keras.optimizers import adam_v2
+from tensorflow import keras
 
 from rl.callbacks import ModelIntervalCheckpoint
 from rl.agents import DQNAgent
@@ -99,7 +100,7 @@ def build_callbacks():
 
 
 dqn = build_agent(model, actions)
-dqn.compile(adam_v2.Adam(learning_rate=learning_rate))
+dqn.compile(keras.optimizers.Adam(learning_rate=learning_rate))
 
 callbacks = build_callbacks()
 dqn.fit(env, nb_steps=1000000, visualize=False, verbose=2, callbacks=callbacks)
