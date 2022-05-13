@@ -12,14 +12,15 @@ RUN apt-get update -qq \
 
 COPY . /src
 WORKDIR /src
-#getting ale-py to run in docker
-RUN pip3 install --upgrade pip
+#install packages
 RUN pip3 install --trusted-host pypi.python.org -r requirements.txt
+#check if 
 #import ROMS
 RUN wget http://www.atarimania.com/roms/Roms.rar
 RUN locale-gen en_US.UTF-8
 RUN unrar x Roms.rar -y
-#RUN python3 -m atari_py.import_roms ROMS/
+RUN python3 -m atari_py.import_roms .
+#import Baselines / AI enviroments
 RUN git clone https://github.com/openai/baselines.git
 RUN pip3 install -e baselines/
 # CMD ['python3', '/src/main.py']

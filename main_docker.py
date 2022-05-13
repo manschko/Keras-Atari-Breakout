@@ -100,7 +100,7 @@ def build_callbacks():
 
 
 dqn = build_agent(model, actions)
-dqn.compile(keras.optimizers.Adam(learning_rate=learning_rate))
+dqn.compile(adam_v2.Adam(learning_rate=learning_rate))
 
 callbacks = build_callbacks()
 dqn.fit(env, nb_steps=1000000, visualize=False, verbose=2, callbacks=callbacks)
