@@ -3,21 +3,26 @@ pip install tensorflow gym keras-rl2 gym[atari]
 
 """
 
-#import gym
-#import tensorflow as tf
+import gym
 
 from baselines.common.atari_wrappers import make_atari, wrap_deepmind
 
 from keras.models import Sequential
 from keras.layers import Dense, Flatten, Convolution2D
 from keras.optimizers import adam_v2
-from tensorflow import keras
 
 from rl.callbacks import ModelIntervalCheckpoint
 from rl.agents import DQNAgent
 from rl.memory import SequentialMemory
 from rl.policy import LinearAnnealedPolicy, EpsGreedyQPolicy
 
+
+env = gym.make('Breakout-v4')
+height, width, channels = env.observation_space.shape
+actions = env.action_space.n  # number of Actions
+episodes = 5
+
+"""
 seed = 42
 # Use the Baseline Atari environment because of Deepmind helper functions
 env = make_atari("BreakoutNoFrameskip-v4")
@@ -28,7 +33,7 @@ height, width, channels = env.observation_space.shape
 
 actions = env.action_space.n  # number of Actions
 episodes = 5
-
+"""
 
 """
 Radom choice
