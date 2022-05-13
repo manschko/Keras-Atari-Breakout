@@ -23,5 +23,6 @@ RUN python3 -m atari_py.import_roms .
 #import Baselines / AI enviroments
 RUN git clone https://github.com/openai/baselines.git
 RUN pip3 install -e baselines/
+# start Program
 # CMD ['python3', '/src/main.py']
 EXPOSE 8080
