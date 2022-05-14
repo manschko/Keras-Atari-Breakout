@@ -1,5 +1,5 @@
 # base container for jetsonNano Tensorflow
-FROM nvcr.io/nvidia/l4t-tensorflow:r32.7.1-tf2.7-py3
+FROM nvcr.io/nvidia/l4t-tensorflow:r32.6.1-tf2.5-py3
 RUN apt-get update -qq \
     && apt-get upgrade -qq \
     && apt-get install --no-install-recommends -y \
@@ -13,6 +13,7 @@ RUN apt-get update -qq \
 COPY . /src
 WORKDIR /src
 #install packages
+RUN pip3 install --upgrade pip
 RUN pip3 install --trusted-host pypi.python.org -r requirements.txt
 #check if 
 #import ROMS
