@@ -4,7 +4,6 @@ pip install tensorflow gym keras-rl2 gym[atari]
 """
 
 import gym
-import tensorflow as tf
 
 from keras.models import Sequential
 from keras.layers import Dense, Flatten, Convolution2D
@@ -23,25 +22,6 @@ episodes = 5
 
 
 """
-Radom choice
-
-
-
-
-for episode in range(episodes):
-    state = env.reset()
-    done = False
-    score = 0
-
-    while not done:
-        # env.render()  # prints the enviroment to the scree
-        action = random.choice([0, 1, 2, 3])  # random action index
-        n_sate, reward, done, info = env.step(action)
-        score += reward
-    print('Episode:{} Score:{}'.format(episode, score))
-env.close()
-"""
-"""
 create DeepQ Model
 """
 
@@ -59,7 +39,7 @@ def build_model(height, width, channels, actions):
 
 
 model = build_model(height, width, channels, actions)
-# model.summary()#shows model architecture
+model.summary()#shows model architecture
 
 """
 Build Agent
