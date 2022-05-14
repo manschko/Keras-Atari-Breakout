@@ -1,5 +1,4 @@
 import gym
-import tensorflow as tf
 from baselines.common.atari_wrappers import make_atari, wrap_deepmind
 
 from keras.models import Sequential
@@ -11,11 +10,6 @@ from rl.agents import DQNAgent
 from rl.memory import SequentialMemory
 from rl.policy import LinearAnnealedPolicy, EpsGreedyQPolicy
 
-#Limit GPU not working
-gpus = tf.config.experimental.list_physical_devices('GPU')
-for gpu in gpus:
-  tf.config.experimental.set_memory_growth(gpu, True)
-  tf.config.experimental.set_virtual_device_configuration(gpu, [tf.config.experimental.VirtualDeviceConfiguration(memory_limit=2048)])
 
 env = gym.make('BreakoutNoFrameskip-v4')
 height, width, channels = env.observation_space.shape
