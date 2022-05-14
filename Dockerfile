@@ -1,5 +1,5 @@
 # base container for jetsonNano Tensorflow
-FROM nvcr.io/nvidia/l4t-tensorflow:r32.6.1-tf2.5-py3
+FROM nvcr.io/nvidia/l4t-tensorflow:r32.7.1-tf2.7-py3
 RUN apt-get update -qq \
     && apt-get upgrade -qq \
     && apt-get install --no-install-recommends -y \
