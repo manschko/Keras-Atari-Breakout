@@ -2,8 +2,11 @@
 pip install tensorflow gym keras-rl2 gym[atari]
 
 """
+import glob
+import os
 
 import gym
+import numpy as np
 
 from keras.models import Sequential
 from keras.layers import Dense, Flatten, Convolution2D
@@ -33,7 +36,6 @@ def build_model(height, width, channels, actions):
     model.add(Convolution2D(64, (3, 3), activation='relu'))  # strides is 1x1
     model.add(Flatten())
     model.add(Dense(512, activation='relu'))
-    model.add(Dense(256, activation='relu'))
     model.add(Dense(actions, activation='linear'))
     return model
 
@@ -49,7 +51,7 @@ Build Agent
 max_steps_per_episode = 10000
 epsilon_min = 0.1  # Minimum epsilon greedy parameter
 epsilon_max = 1.0  # Maximum epsilon greedy parameter
-learning_rate = 1e-4
+learning_rate = 0.00025
 
 
 def build_agent(model, actions):
@@ -65,7 +67,19 @@ def build_agent(model, actions):
 """
 train and save Model
 """
+count = 0
+latest_file = ''
+try:
+    list_of_files = glob.glob('model/*') # * means all if need specific format then *.csv
+    latest_file = max(list_of_files, key=os.path.getctime)
+    count = int(latest_file.split('_')[-1].split('.')[0])
+except:
+    count = 0
+
+steps = 900000
+
 def build_callbacks():
+
     checkpoint_weights_filepath = 'model/dqn_model_weights_{step}.h5'
     callbacks = [ModelIntervalCheckpoint(checkpoint_weights_filepath, interval=1000)]
     return callbacks
@@ -74,5 +88,11 @@ def build_callbacks():
 dqn = build_agent(model, actions)
 dqn.compile(adam_v2.Adam(learning_rate=learning_rate))
 
+if latest_file != '':
+    dqn.load_weights('model_smalll_it1/dqn_model_weights_100000.h5')
+dqn.load_weights('model_smalll_it1/dqn_model_weights_100000.h5')
+
+#scores = dqn.test(env, visualize=False, nb_max_episode_steps=300, verbose=0, nb_episodes=10)
+#print(np.mean(scores.history['episode_reward']))
 callbacks = build_callbacks()
-dqn.fit(env, nb_steps=1000000, visualize=False, verbose=2, callbacks=callbacks)
+dqn.fit(env, nb_steps=steps, visualize=False, verbose=2, callbacks=callbacks)
