@@ -22,7 +22,7 @@ env = gym.make('ALE/Breakout-v5', render_mode=None)
 height, width, channels = env.observation_space.shape
 actions = env.action_space.n  # number of Actions
 episodes = 5
-
+file_path = input("Path to Weight file if continuing training, or enter if no file")
 
 """
 create DeepQ Model
@@ -88,11 +88,9 @@ def build_callbacks():
 dqn = build_agent(model, actions)
 dqn.compile(adam_v2.Adam(learning_rate=learning_rate))
 
-if latest_file != '':
-    dqn.load_weights('model_smalll_it1/dqn_model_weights_100000.h5')
-dqn.load_weights('model_smalll_it1/dqn_model_weights_100000.h5')
+if file_path != '':
+    dqn.load_weights(file_path)
 
-#scores = dqn.test(env, visualize=False, nb_max_episode_steps=300, verbose=0, nb_episodes=10)
-#print(np.mean(scores.history['episode_reward']))
+
 callbacks = build_callbacks()
 dqn.fit(env, nb_steps=steps, visualize=False, verbose=2, callbacks=callbacks)
