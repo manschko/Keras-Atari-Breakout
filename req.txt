@@ -2,5 +2,4 @@ tensorflow
 keras-rl2
 gym
 gym[atari]
-atari-py
 AutoROM

@@ -23,7 +23,7 @@ except:
 actions = env.action_space.n  # number of Actions
 
 episodes = 5
-file_path = input("Path to Weight file if continuing training, or enter if no file")
+file_path = input("Path to Weight file if continuing training, or enter if no file\n")
 
 model = util.build_model_keras(height, width, actions)
 
