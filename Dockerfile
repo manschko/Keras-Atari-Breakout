@@ -17,7 +17,7 @@ RUN pip3 install --trusted-host pypi.python.org -r requirements.txt
 RUN wget http://www.atarimania.com/roms/Roms.rar
 RUN locale-gen en_US.UTF-8
 RUN unrar x Roms.rar -y
-RUN python3 -m atari_py.import_roms .
+RUN AutoROM --install-dir /usr/local/lib/python3.6/dist-packages/atari_py/atari_roms -y
 #import Baselines / AI enviroments
 RUN mkdir model
 # start Program
