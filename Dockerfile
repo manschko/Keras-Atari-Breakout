@@ -7,9 +7,6 @@ RUN apt-get update -qq \
     cmake \
     git
 
-
-
-
 COPY . /src
 WORKDIR /src
 #install packages
@@ -22,9 +19,6 @@ RUN locale-gen en_US.UTF-8
 RUN unrar x Roms.rar -y
 RUN python3 -m atari_py.import_roms .
 #import Baselines / AI enviroments
-RUN git clone https://github.com/openai/baselines.git
-RUN pip3 install -e baselines/
 RUN mkdir model
 # start Program
-# CMD ['python3', '/src/main.py']
-EXPOSE 8080
+# CMD ['python3', '/src/main_docker.py']

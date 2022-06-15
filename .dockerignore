@@ -1,4 +1,7 @@
 .idea
-baselines
+baselines*
 Roms
 ROMS2
+model*
+cheat
+venv*

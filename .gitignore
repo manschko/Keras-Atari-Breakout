@@ -4,7 +4,8 @@ __pycache__/
 *$py.class
 .idea
 Roms*
-model
+model*
+cheat
 
 # C extensions
 *.so
